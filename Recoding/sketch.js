@@ -1,5 +1,5 @@
-// variable of the canvas
-let cnv;
+
+/* ********** CONSTANT ********** */
 // height of the variation in the middle
 let h_var = 40;
 // width of the variation in the middle
@@ -8,11 +8,34 @@ let w_var = 8e6;
 let wave = 20;
 let noiseScale = 0.2;
 
+/* ********** VARIABLES ********** */
+// variable of the canvas
+let cnv;
+let sound;
+
+function preload() 
+{
+  sound = loadSound(addons/disorder.mp3);
+}
+
 function centerCanvas() 
 {
   var x = (windowWidth - width) / 2;
   var y = (windowHeight - height) / 2;
   cnv.position(x, y);
+}
+
+function windowResized() 
+{
+  centerCanvas();
+}
+
+function togglePlay() 
+{
+  if (sound.isPlaying())
+    sound.pause();
+  else
+    sound.loop();
 }
 
 function setup()
@@ -32,9 +55,6 @@ function setup()
       v(x,y-(h_var/(1+pow(x-a/2,4)/w_var))*noise(x/wave, y))
     endShape()
   }
-}
 
-function windowResized() 
-{
-  centerCanvas();
+  cnv.mouseClicked(togglePlay);
 }
