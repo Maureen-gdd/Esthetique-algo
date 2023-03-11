@@ -1,4 +1,12 @@
+// variable of the canvas
 let cnv;
+// height of the variation in the middle
+let h_var = 40;
+// width of the variation in the middle
+let w_var = 8e6;
+// more or less wave, higher number = less wave
+let wave = 20;
+let noiseScale = 0.2;
 
 function centerCanvas() 
 {
@@ -7,29 +15,23 @@ function centerCanvas()
   cnv.position(x, y);
 }
 
-function setup() 
+function setup()
 {
-  // width, height
-  cnv = createCanvas(windowWidth*0.8, windowHeight*0.9);
+  cnv = createCanvas(a=windowWidth*0.8, b=windowHeight*0.9)
+  background(0);
   centerCanvas();
-  background(0, 0, 0);
-}
-
-function draw() 
-{
-  let y = 100;
-  for(let i = 0; i < 80; i++)
+  let v=vertex;
+  // to not fill the vertex and have line
+  fill(0);
+  // colour white
+  stroke(b) ;
+  for(y = height*0.2; y < height-height*0.1; y+=5) 
   {
-    stroke(255,255,255);
-    line(width*0.35, y, width - width*0.35, y);
-    y+=6;
+    beginShape()
+    for(x = width*0.35; x < width-width*0.35; ++x)
+      v(x,y-(h_var/(1+pow(x-a/2,4)/w_var))*noise(x/wave, y))
+    endShape()
   }
-  /*xoff = xoff + 0.01;
-  let n = noise(xoff) * width;
-  //line(x1, y1, x2, y2)
-  line(0, n, width, n);
-  describe(`vertical line moves left to right with updating
-    noise values.`);*/
 }
 
 function windowResized() 
