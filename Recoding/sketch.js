@@ -15,7 +15,7 @@ let sound;
 
 function preload() 
 {
-  sound = loadSound(addons/disorder.mp3);
+  sound = loadSound('disorder.mp3');
 }
 
 function centerCanvas() 
@@ -32,7 +32,7 @@ function windowResized()
 
 function togglePlay() 
 {
-  if (sound.isPlaying())
+  if(sound.isPlaying())
     sound.pause();
   else
     sound.loop();
